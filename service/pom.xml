@@ -52,27 +52,12 @@
             <version>${springdoc-openapi-ui.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.openapitools/jackson-databind-nullable -->
         <dependency>
             <groupId>org.openapitools</groupId>
             <artifactId>jackson-databind-nullable</artifactId>
             <version>0.2.1</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/io.swagger/swagger-annotations -->
-        <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-annotations</artifactId>
-            <version>${swagger-annotations-version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.testcontainers/junit-jupiter -->
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -80,11 +65,16 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.testcontainers/mysql -->
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>mysql</artifactId>
             <version>1.16.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
 
@@ -100,6 +90,11 @@
             <artifactId>realmeet-client</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-core</artifactId>
+            <version>2.9.2</version>
         </dependency>
     </dependencies>
 
@@ -129,6 +124,7 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -137,6 +133,7 @@
                     <mainClass>br.com.sw2you.realmeet.Application</mainClass>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -154,26 +151,26 @@
                 </configuration>
             </plugin>
 
-<!--            <plugin>-->
-<!--                <groupId>com.hubspot.maven.plugins</groupId>-->
-<!--                <artifactId>prettier-maven-plugin</artifactId>-->
-<!--                <version>${prettier-maven-plugin.version}</version>-->
-<!--                <configuration>-->
-<!--                    <printWidth>120</printWidth>-->
-<!--                    <tabWidth>4</tabWidth>-->
-<!--                    <prettierJavaVersion>0.7.1</prettierJavaVersion>-->
-<!--                    <generateDiff>true</generateDiff>-->
-<!--                    <fail>true</fail>-->
-<!--                </configuration>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <phase>compile</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>check</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
+            <!--<plugin>
+                <groupId>com.hubspot.maven.plugins</groupId>
+                <artifactId>prettier-maven-plugin</artifactId>
+                <version>${prettier-maven-plugin.version}</version>
+                <configuration>
+                    <printWidth>120</printWidth>
+                    <tabWidth>4</tabWidth>
+                    <prettierJavaVersion>0.7.1</prettierJavaVersion>
+                    <generateDiff>true</generateDiff>
+                    <fail>true</fail>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>-->
 
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -192,7 +189,7 @@
             <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>${openapi-generator-maven-plugin.version}</version>
+                <version>5.2.1</version>
                 <executions>
                     <execution>
                         <goals>
@@ -217,8 +214,6 @@
                     </execution>
                 </executions>
             </plugin>
-
         </plugins>
     </build>
-
 </project>
