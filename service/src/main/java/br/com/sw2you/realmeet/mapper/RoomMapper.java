@@ -9,5 +9,6 @@ import org.mapstruct.Mapper;
 public abstract class RoomMapper {
 
     public abstract RoomDTO fromEntityToDto(Room room);
+
     public abstract Room fromCreateRoomDtoToEntity(CreateRoomDTO createRoomDTO);
 }

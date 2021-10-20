@@ -1,15 +1,14 @@
 package br.com.sw2you.realmeet.validator;
 
-import org.springframework.data.util.Streamable;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import org.springframework.data.util.Streamable;
 
 public class ValidationErrors implements Streamable<ValidationError> {
     private final List<ValidationError> validationErrorList;
 
-    public ValidationErrors(List<ValidationError> validatorErrorList) {
+    public ValidationErrors() {
         this.validationErrorList = new ArrayList<>();
     }
 
@@ -38,7 +37,6 @@ public class ValidationErrors implements Streamable<ValidationError> {
     public String toString() {
         return "ValidationErrors{" + "validationErrorList=" + validationErrorList + '}';
     }
-
 
     @Override
     public Iterator<ValidationError> iterator() {

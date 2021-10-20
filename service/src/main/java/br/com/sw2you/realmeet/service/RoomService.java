@@ -6,9 +6,8 @@ import br.com.sw2you.realmeet.domain.entity.Room;
 import br.com.sw2you.realmeet.domain.repository.RoomRepository;
 import br.com.sw2you.realmeet.exception.RoomNotFoundException;
 import br.com.sw2you.realmeet.mapper.RoomMapper;
-import java.util.Objects;
-
 import br.com.sw2you.realmeet.validator.RoomValidator;
+import java.util.Objects;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,7 +16,7 @@ public class RoomService {
     private final RoomValidator roomValidator;
     private final RoomMapper roomMapper;
 
-    public RoomService(RoomRepository roomRepository, RoomValidator roomValidator,RoomMapper roomMapper) {
+    public RoomService(RoomRepository roomRepository, RoomValidator roomValidator, RoomMapper roomMapper) {
         this.roomMapper = roomMapper;
         this.roomValidator = roomValidator;
         this.roomRepository = roomRepository;

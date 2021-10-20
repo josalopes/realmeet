@@ -14,7 +14,6 @@ import org.springframework.test.context.ActiveProfiles;
 @ActiveProfiles(profiles = "integration-test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = Application.class)
 public abstract class BaseIntegrationTest {
-
     @Autowired
     private Flyway flyway;
 
