@@ -75,4 +75,16 @@ class RoomApiIntegrationTest extends BaseIntegrationTest {
             () -> roomApi.createRoom((newCreateRoomDTO().name(null)))
         );
     }
+
+    @Test
+    void testDeleteRoomSuccess() {
+        var roomId = roomRepository.saveAndFlush(newRoomBuilder().build()).getId();
+        roomApi.deleteRoom(roomId);
+        assertFalse(roomRepository.findById(roomId).orElseThrow().getActive());
+    }
+
+    @Test
+    void testDeleteRoomThatDoesNotExist() {
+        assertThrows(HttpClientErrorException.NotFound.class, () -> roomApi.deleteRoom(1L));
+    }
 }
