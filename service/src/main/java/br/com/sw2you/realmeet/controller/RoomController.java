@@ -1,5 +1,6 @@
 package br.com.sw2you.realmeet.controller;
 
+import static java.util.concurrent.CompletableFuture.runAsync;
 import static java.util.concurrent.CompletableFuture.supplyAsync;
 
 import br.com.sw2you.realmeet.api.facade.RoomsApi;
@@ -25,6 +26,11 @@ public class RoomController implements RoomsApi {
     @Override
     public CompletableFuture<ResponseEntity<RoomDTO>> getRoom(Long id) {
         return supplyAsync(() -> roomService.getRoom(id), controllerExecutor).thenApply(ResponseEntityUtils::ok);
+    }
+
+    @Override
+    public CompletableFuture<ResponseEntity<Void>> deleteRoom(Long id) {
+        return runAsync(() -> roomService.deleteRoom(id), controllerExecutor).thenApply(ResponseEntityUtils::noContent);
     }
 
     @Override
