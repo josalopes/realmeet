@@ -38,12 +38,10 @@ public class RoomService {
     }
 
     @Transactional
-    public RoomDTO updateRoom(Long roomId, UpdateRoomDTO updateRoomDTO) {
-        roomValidator.validate(roomId, updateRoomDTO);
+    public void updateRoom(Long roomId, UpdateRoomDTO updateRoomDTO) {
         getActiveRoomOrThrow(roomId);
+        roomValidator.validate(roomId, updateRoomDTO);
         roomRepository.updateRoom(roomId, updateRoomDTO.getName(), updateRoomDTO.getSeats());
-        Room room = getActiveRoomOrThrow(roomId);
-        return roomMapper.fromEntityToDto(room);
     }
 
     @Transactional
