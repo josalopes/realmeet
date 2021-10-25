@@ -4,9 +4,12 @@ import static br.com.sw2you.realmeet.validator.ValidatorConstants.*;
 import static br.com.sw2you.realmeet.validator.ValidatorUtils.*;
 
 import br.com.sw2you.realmeet.api.model.CreateRoomDTO;
+import br.com.sw2you.realmeet.api.model.UpdateRoomDTO;
 import br.com.sw2you.realmeet.domain.repository.RoomRepository;
 import br.com.sw2you.realmeet.exception.InvalidRequestException;
 import org.springframework.stereotype.Component;
+
+import java.util.Objects;
 
 @Component
 public class RoomValidator {
@@ -23,7 +26,20 @@ public class RoomValidator {
             validateName(createRoomDTO.getName(), validationErrors) &&
             validateSeats(createRoomDTO.getSeats(), validationErrors)
         ) {
-            validateNameDuplicate(createRoomDTO.getName(), validationErrors);
+            validateNameDuplicate(null, createRoomDTO.getName(), validationErrors);
+        }
+
+        throwOnError(validationErrors);
+    }
+    public void validate(Long roomId, UpdateRoomDTO updateRoomDTO) {
+        var validationErrors = new ValidationErrors();
+
+        if (
+            validateRequired(roomId, ROOM_ID, validationErrors) &&
+            validateName(updateRoomDTO.getName(), validationErrors) &&
+            validateSeats(updateRoomDTO.getSeats(), validationErrors)
+        ) {
+            validateNameDuplicate(roomId, updateRoomDTO.getName(), validationErrors);
         }
 
         throwOnError(validationErrors);
@@ -44,13 +60,13 @@ public class RoomValidator {
         );
     }
 
-    private void validateNameDuplicate(String name, ValidationErrors validationErrors) {
+    private void validateNameDuplicate(Long roomIdToExclude, String name, ValidationErrors validationErrors) {
         roomRepository
             .findByNameAndActive(name, true)
-            .ifPresent(
-                __ -> {
+            .ifPresent(room -> {
+                if (!Objects.isNull(roomIdToExclude) && !Objects.equals(room.getId(), roomIdToExclude)) {
                     validationErrors.add(ROOM_NAME, ROOM_NAME + DUPLICATE);
                 }
-            );
+            });
     }
 }

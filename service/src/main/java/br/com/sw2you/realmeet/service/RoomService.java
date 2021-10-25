@@ -2,6 +2,7 @@ package br.com.sw2you.realmeet.service;
 
 import br.com.sw2you.realmeet.api.model.CreateRoomDTO;
 import br.com.sw2you.realmeet.api.model.RoomDTO;
+import br.com.sw2you.realmeet.api.model.UpdateRoomDTO;
 import br.com.sw2you.realmeet.domain.entity.Room;
 import br.com.sw2you.realmeet.domain.repository.RoomRepository;
 import br.com.sw2you.realmeet.exception.RoomNotFoundException;
@@ -37,6 +38,15 @@ public class RoomService {
     }
 
     @Transactional
+    public RoomDTO updateRoom(Long roomId, UpdateRoomDTO updateRoomDTO) {
+        roomValidator.validate(roomId, updateRoomDTO);
+        getActiveRoomOrThrow(roomId);
+        roomRepository.updateRoom(roomId, updateRoomDTO.getName(), updateRoomDTO.getSeats());
+        Room room = getActiveRoomOrThrow(roomId);
+        return roomMapper.fromEntityToDto(room);
+    }
+
+    @Transactional
     public void deleteRoom(Long roomId) {
         Room room = getActiveRoomOrThrow(roomId);
         roomRepository.deactivate(roomId);
@@ -45,7 +55,7 @@ public class RoomService {
     private Room getActiveRoomOrThrow(Long id) {
         Objects.requireNonNull(id);
         return roomRepository
-                .findByIdAndActive(id, true)
-                .orElseThrow(() -> new RoomNotFoundException("Room not found: " + id));
+            .findByIdAndActive(id, true)
+            .orElseThrow(() -> new RoomNotFoundException("Room not found: " + id));
     }
 }
