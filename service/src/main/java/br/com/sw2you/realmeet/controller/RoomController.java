@@ -26,8 +26,7 @@ public class RoomController implements RoomsApi {
 
     @Override
     public CompletableFuture<ResponseEntity<RoomDTO>> getRoom(Long id) {
-        return supplyAsync(() -> roomService.getRoom(id), controllerExecutor)
-            .thenApply(ResponseEntityUtils::ok);
+        return supplyAsync(() -> roomService.getRoom(id), controllerExecutor).thenApply(ResponseEntityUtils::ok);
     }
 
     @Override
@@ -38,8 +37,7 @@ public class RoomController implements RoomsApi {
 
     @Override
     public CompletableFuture<ResponseEntity<Void>> deleteRoom(Long id) {
-        return runAsync(() -> roomService.deleteRoom(id), controllerExecutor)
-            .thenApply(ResponseEntityUtils::noContent);
+        return runAsync(() -> roomService.deleteRoom(id), controllerExecutor).thenApply(ResponseEntityUtils::noContent);
     }
 
     @Override

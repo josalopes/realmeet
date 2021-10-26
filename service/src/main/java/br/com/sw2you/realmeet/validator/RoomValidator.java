@@ -7,9 +7,8 @@ import br.com.sw2you.realmeet.api.model.CreateRoomDTO;
 import br.com.sw2you.realmeet.api.model.UpdateRoomDTO;
 import br.com.sw2you.realmeet.domain.repository.RoomRepository;
 import br.com.sw2you.realmeet.exception.InvalidRequestException;
-import org.springframework.stereotype.Component;
-
 import java.util.Objects;
+import org.springframework.stereotype.Component;
 
 @Component
 public class RoomValidator {
@@ -31,6 +30,7 @@ public class RoomValidator {
 
         throwOnError(validationErrors);
     }
+
     public void validate(Long roomId, UpdateRoomDTO updateRoomDTO) {
         var validationErrors = new ValidationErrors();
 
@@ -63,10 +63,12 @@ public class RoomValidator {
     private void validateNameDuplicate(Long roomIdToExclude, String name, ValidationErrors validationErrors) {
         roomRepository
             .findByNameAndActive(name, true)
-            .ifPresent(room -> {
-                if (Objects.isNull(roomIdToExclude) || !Objects.equals(room.getId(), roomIdToExclude)) {
-                    validationErrors.add(ROOM_NAME, ROOM_NAME + DUPLICATE);
+            .ifPresent(
+                room -> {
+                    if (Objects.isNull(roomIdToExclude) || !Objects.equals(room.getId(), roomIdToExclude)) {
+                        validationErrors.add(ROOM_NAME, ROOM_NAME + DUPLICATE);
+                    }
                 }
-            });
+            );
     }
 }
