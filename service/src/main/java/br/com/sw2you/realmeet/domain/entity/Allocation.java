@@ -18,6 +18,7 @@ public class Allocation {
    @JoinColumn(name = "room_id")
    private Room room;
 
+   @Embedded
    private Employee employee;
 
    @Column(name = "subject")
