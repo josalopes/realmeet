@@ -1,10 +1,13 @@
 package br.com.sw2you.realmeet.domain.entity;
 
 import br.com.sw2you.realmeet.domain.model.Employee;
+import br.com.sw2you.realmeet.util.DateUtils;
 
 import javax.persistence.*;
 import java.time.OffsetDateTime;
 import java.util.Objects;
+
+import static java.util.Objects.isNull;
 
 @Entity
 @Table(name = "allocation")
@@ -48,6 +51,19 @@ public class Allocation {
    }
 
    public Allocation() {}
+
+   @PrePersist
+   public void prePersist() {
+      if (isNull(createdAt)) {
+         createdAt = DateUtils.now();
+      }
+      updatedAt = createdAt;
+   }
+
+   @PreUpdate
+   public void preUpdate() {
+      updatedAt = DateUtils.now();
+   }
 
    public Long getId() {
       return id;

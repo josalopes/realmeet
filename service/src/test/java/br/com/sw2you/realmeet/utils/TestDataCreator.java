@@ -41,7 +41,7 @@ public class TestDataCreator {
         return new CreateAllocationDTO()
             .subject(DEFAULT_ALLOCATION_SUBJECT)
             .roomId(DEFAULT_ROOM_ID)
-            .employeeEmail(DEFAULT_EMPLOYEE_NAME)
+            .employeeName(DEFAULT_EMPLOYEE_NAME)
             .employeeEmail(DEFAULT_EMPLOYEE_EMAIL)
             .startAt(DEFAULT_ALLOCATION_START_AT)
             .endAt(DEFAULT_ALLOCATION_END_AT);

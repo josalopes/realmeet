@@ -94,11 +94,11 @@ class RoomApiIntegrationTest extends BaseIntegrationTest {
         var room = roomRepository.saveAndFlush(newRoomBuilder().build());
         var updateRoomDTO = new UpdateRoomDTO().name(room.getName() + "_").seats(room.getSeats() + 1);
 
-//        roomApi.updateRoom(room.getId(), updateRoomDTO);
-//
-//        var updatedRoom = roomRepository.findById(room.getId()).orElseThrow();
-//        assertEquals(updateRoomDTO.getName(), updatedRoom.getName());
-//        assertEquals(updateRoomDTO.getSeats(), updatedRoom.getSeats());
+        roomApi.updateRoom(room.getId(), updateRoomDTO);
+
+        var updatedRoom = roomRepository.findById(room.getId()).orElseThrow();
+        assertEquals(updateRoomDTO.getName(), updatedRoom.getName());
+        assertEquals(updateRoomDTO.getSeats(), updatedRoom.getSeats());
     }
 
     @Test

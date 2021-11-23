@@ -1,11 +1,8 @@
 package br.com.sw2you.realmeet.controller;
 
 import br.com.sw2you.realmeet.api.facade.AllocationsApi;
-import br.com.sw2you.realmeet.api.facade.RoomsApi;
 import br.com.sw2you.realmeet.api.model.*;
-import br.com.sw2you.realmeet.domain.entity.Allocation;
 import br.com.sw2you.realmeet.service.AllocationService;
-import br.com.sw2you.realmeet.service.RoomService;
 import br.com.sw2you.realmeet.util.ResponseEntityUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
-import static java.util.concurrent.CompletableFuture.runAsync;
 import static java.util.concurrent.CompletableFuture.supplyAsync;
 
 @RestController

@@ -12,15 +12,4 @@ import java.util.Optional;
 
 @Repository
 public interface AllocationRepository extends JpaRepository<Allocation, Long> {
-    Optional<Room> findByIdAndActive(Long id, Boolean active);
-
-    Optional<Room> findByNameAndActive(String name, Boolean active);
-
-    @Modifying(clearAutomatically = true, flushAutomatically = true)
-    @Query("UPDATE Room r SET r.active = false WHERE r.id = :roomId")
-    void deactivate(@Param("roomId") Long roomId);
-
-    @Modifying(clearAutomatically = true, flushAutomatically = true)
-    @Query("UPDATE Room r SET r.name = :name, r.seats = :seats WHERE r.id = :roomId")
-    void updateRoom(@Param("roomId") Long roomId, @Param("roomId") String name, @Param("roomId") Integer seats);
 }
