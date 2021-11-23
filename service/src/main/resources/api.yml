@@ -120,6 +120,28 @@ paths:
         404:
           description: Not Found
 
+  /allocations/{id}:
+    delete:
+      summary: 'Deletes a specific allocation by its id'
+      operationId: deleteAllocation
+      tags:
+        - allocation
+      parameters:
+        - name: id
+          in: path
+          description: ID of the allocation
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        204:
+          description: 'Deleted successfully'
+        404:
+          description: Not Found
+        422:
+          $ref: '#/components/responses/UnprocessableEntity'
+
 components:
   schemas:
     UpdateRoomDTO:
