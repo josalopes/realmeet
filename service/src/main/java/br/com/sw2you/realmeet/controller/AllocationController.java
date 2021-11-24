@@ -24,6 +24,12 @@ public class AllocationController implements AllocationsApi {
     }
 
     @Override
+    public CompletableFuture<ResponseEntity<Void>> updateAllocation(Long id, UpdateAllocationDTO updateAllocationDTO) {
+        return runAsync(() -> allocationService.updateAllocation(id, updateAllocationDTO), controllerExecutor)
+                .thenApply(ResponseEntityUtils::noContent);
+    }
+
+    @Override
     public CompletableFuture<ResponseEntity<Void>> deleteAllocation(Long id) {
         return runAsync(() -> allocationService.deleteAllocation(id), controllerExecutor).thenApply(ResponseEntityUtils::noContent);
     }
